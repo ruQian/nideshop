@@ -16,6 +16,21 @@ module.exports = class extends Base {
     return this.success(data);
   }
 
+  //得到分类下的商品
+  async getGoodsByIdAction() {
+    const page = this.get('page') || 1;
+    const size = this.get('size') || 10;
+    const name = this.get('name') || '';
+
+    
+    const id = this.get('categoryId');
+
+    const model = this.model('goods');
+    const data = await model.where({category_id:id,name: ['like', `%${name}%`]}).order(['id DESC']).page(page, size).countSelect();
+
+    return this.success(data);
+  }
+  
   async infoAction() {
     const id = this.get('id');
     const model = this.model('goods');
