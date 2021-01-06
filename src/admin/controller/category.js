@@ -31,6 +31,18 @@ module.exports = class extends Base {
 
     return this.success(data);
   }
+//获取二级分类
+  async secCategoryAction() {
+    const id = this.get('parentID');
+
+    if (think.isEmpty(id)) {
+      return this.fail(401, '缺少参数');
+    }
+    const model = this.model('category');
+    const data = await model.where({parent_id: id}).order(['id ASC']).select();
+
+    return this.success(data);
+  }
 
   async infoAction() {
     const id = this.get('id');
