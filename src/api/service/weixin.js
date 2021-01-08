@@ -5,6 +5,9 @@ const rp = require('request-promise');
 module.exports = class extends think.Service {
   async login(code, fullUserInfo) {
     try {
+      console.log(think.config('login'));
+      console.log(think.config('weixin.secret'));
+      console.log(think.config('weixin.appid'));
       // 获取 session
       const options = {
         method: 'GET',
