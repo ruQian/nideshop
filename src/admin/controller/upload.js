@@ -16,7 +16,8 @@ module.exports = class extends Base {
     return that.success({
       name: 'brand_pic - ' + is,
       fileUrl: 'http://127.0.0.1:8360' + filename,
-      path:brandFile.path
+      path:brandFile.path,
+      size:brandFile.size
     });
   }
 
