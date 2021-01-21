@@ -17,7 +17,7 @@ module.exports = class extends Base {
 
 
     //!!!
-    const filepath = path.join(think.ROOT_PATH, think.ROOT_PATH + '/www' + filename);
+    const filepath = path.join(think.ROOT_PATH, '/www' + filename);
     think.mkdir(path.dirname(filepath));
     await rename(brandFile.path, filepath)
 
