@@ -9,14 +9,22 @@ module.exports = class extends Base {
     }
     const that = this;
     const filename = '/static/upload/brand/' + think.uuid(32) + '.jpg';
-    const is = fs.createReadStream(brandFile.path);
-    const os = fs.createWriteStream(think.ROOT_PATH + '/www' + filename);
-    is.pipe(os);
+    //const is = fs.createReadStream(brandFile.path);
+    //const os = fs.createWriteStream(think.ROOT_PATH + '/www' + filename);
+    //is.pipe(os);
+
+
+    //!!!
+    const filepath = path.join(think.ROOT_PATH, think.ROOT_PATH + '/www' + filename);
+    think.mkdir(path.dirname(filepath));
+    await rename(file.path, filepath)
+
 
     return that.success({
       name: 'brand_pic - ' + is,
       fileUrl: 'http://127.0.0.1:8360' + filename,
       path:brandFile.path,
+      path2:filepath,
       size:brandFile.size
     });
   }
