@@ -1,5 +1,6 @@
 const Base = require('./base.js');
 const fs = require('fs');
+const path = require('path');
 
 module.exports = class extends Base {
   async brandPicAction() {
@@ -17,7 +18,7 @@ module.exports = class extends Base {
     //!!!
     const filepath = path.join(think.ROOT_PATH, think.ROOT_PATH + '/www' + filename);
     think.mkdir(path.dirname(filepath));
-    await rename(file.path, filepath)
+    await rename(brandFile.path, filepath)
 
 
     return that.success({
