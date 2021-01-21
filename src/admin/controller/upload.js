@@ -1,6 +1,7 @@
 const Base = require('./base.js');
 const fs = require('fs');
 const path = require('path');
+const rename = think.promisify(fs.rename, fs); // 通过 promisify 方法把 rename 方法包装成 Promise 接口
 
 module.exports = class extends Base {
   async brandPicAction() {
