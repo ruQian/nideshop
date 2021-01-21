@@ -1,7 +1,5 @@
 const Base = require('./base.js');
 const fs = require('fs');
-const path = require('path');
-const rename = think.promisify(fs.rename, fs); // 通过 promisify 方法把 rename 方法包装成 Promise 接口
 
 module.exports = class extends Base {
   async brandPicAction() {
@@ -11,22 +9,14 @@ module.exports = class extends Base {
     }
     const that = this;
     const filename = '/static/upload/brand/' + think.uuid(32) + '.jpg';
-    //const is = fs.createReadStream(brandFile.path);
-    //const os = fs.createWriteStream(think.ROOT_PATH + '/www' + filename);
-    //is.pipe(os);
-
-
-    //!!!
-    const filepath = path.join(think.ROOT_PATH, '/www' + filename);
-    think.mkdir(path.dirname(filepath));
-    await rename(brandFile.path, filepath)
-
+    const is = fs.createReadStream(brandFile.path);
+    const os = fs.createWriteStream(think.ROOT_PATH + '/www' + filename);
+    is.pipe(os);
 
     return that.success({
-      name: 'brand_pic',
+      name: 'brand_pic - ' + is,
       fileUrl: 'http://127.0.0.1:8360' + filename,
       path:brandFile.path,
-      path2:filepath,
       size:brandFile.size
     });
   }
